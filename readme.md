@@ -45,7 +45,7 @@ We're working on actively improving the template. Stay updated by starring the r
 Or you can:
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-repo/dbcp.git
+   git clone https://github.com/shuretokki/dbcp.git
    ```
 2. **Copy the Template**:
    - Copy `dbcp.cpp` to your working directory and rename it as needed (e.g., `solution.cpp`).
