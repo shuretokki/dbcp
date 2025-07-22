@@ -104,11 +104,11 @@ The template uses:
   - `rall(v)`: `v.rbegin(), v.rend()`.
   - `each(it, v)`: Iterates over container `v` with iterator `it`.
 - **Utility Macros**:
-  - `is_odd(x)`: Checks if `x` is odd.
+  - `isOdd(x)`: Checks if `x` is odd.
   - `sz(v)`: Returns container size as an integer.
   - `add(a, b)`, `sub(a, b)`, `mul(a, b)`: Modular arithmetic operations.
   - `inv(n)`: Modular inverse of `n` under `MOD`.
-  - `ceil_div(a, b)`: Ceiling of `a/b`.
+  - `ceilDiv(a, b)`: Ceiling of `a/b`.
 - **Priority Queue Aliases**:
   - `pqmax`: Max heap (`priority_queue<int>`).
   - `pqmin`: Min heap (`priority_queue<int, vector<int>, greater<int>>`).
@@ -187,7 +187,7 @@ The template uses:
      ```
    - Another Example:
      ```cpp
-     Redirect("Hello World#Hello#World"); // Note that `#` can replace '/n' in this Function
+     Redirect("Hello World#Hello#World"); // Note that `#` can replace '/n' in this function
 
      string hw, h, w;
      input(hw, h, w); // hw take "Hello World", h take "Hello", w take "World"
