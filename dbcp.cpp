@@ -15,8 +15,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-/* clang-format on */
-/*------------------*/
 #pragma alias
 using str                  = string;
 using strv                 = string_view;
@@ -35,9 +33,8 @@ constexpr int         INF  = 1e9;
 constexpr ll          LINF = 1e18;
 
 #pragma setup
-#pragma GCC optimize("O3,unroll-loops")
-#pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
-
+    #pragma GCC       target("avx2,popcnt,lzcnt,abm,bmi,bmi2,fma,tune=native")
+    #pragma GCC       optimize("O3,unroll-loops")
 static const auto __PROGRAM_START_TIME = chrono::steady_clock::now();
 static const auto __SET_IO             = [] {
     ios_base::sync_with_stdio(false);
@@ -55,13 +52,11 @@ static const auto __SET_IO             = [] {
     #define debug(...)
     #define scope(...)
 #endif
-#define input(...)         ::Reader::read(__VA_ARGS__)
-#define output(...)        ::Writer::write(__VA_ARGS__)
-#define outputln(...)      ::Writer::writeln(__VA_ARGS__)
-#define fninput(c, lambda) ::Reader::readwl(c, lambda) // add
-#define delim(c, d)        DelimitedContainer(c, d)
+#define input(...)    ::Reader::read(__VA_ARGS__)
+#define output(...)   ::Writer::write(__VA_ARGS__)
+#define outputln(...) ::Writer::writeln(__VA_ARGS__)
+#define delim(c, d)   DelimitedContainer(c, d)
 
-/* clang-format off */
 #pragma dbg origin
 namespace {
     namespace color {
@@ -327,19 +322,6 @@ namespace {
             (read_one(args), ...);
         }
 
-        template <typename T, typename Lambda>
-        static void readwl(T& container, Lambda&& fn) {
-            if constexpr(is_iterable<T>) {
-                for (auto& element : container) {
-                    read_one(element);
-                    element = fn(element);
-                }
-            } else {
-                read_one(container);
-                container = fn(container);
-            }
-        }
-
         private:
             template <typename T>
             static void read_one(T& arg) {
@@ -504,8 +486,6 @@ namespace {
             }
     };
 } /* namespace */
- /*-----------------*/
-/* clang-format on */
 
 #pragma macro
 #define rep(i, n)     for(int i = 0; i < (n); ++i)
@@ -527,22 +507,21 @@ namespace {
 #define pqmax         priority_queue<int>
 #define pqmin         priority_queue<int, vector<int>, greater<int>>
 
-#pragma solution // adjust
+#pragma solution
 void solve() {
     scope("Solve");
 }
+
 cphro main() {
     scope("Main");
 
 #pragma input
-    /* clang-format off */
     /* Note: Input for Debug Purpose. */
     // ! Define -DLOCAL_DBG to use it.
 
     Redirect(R"(Input Here)");
 
 #pragma main
-    /* clang-format on */
     /* Note: Main Submission.*/
     // ! Define -DLOCAL_DBG to activate debug() & scope().
 
@@ -552,5 +531,3 @@ cphro main() {
     output(testing);
     return 0;
 }
-/* Note: Remove all the note
-if you already know. */
