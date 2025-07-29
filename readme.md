@@ -143,8 +143,8 @@ The template uses:
   - `delim(container, delimiter)`: Outputs container with custom delimiter.
   - Uses buffered output for performance.
 
-### 7. Solution Class
-- Encapsulates logic in a `Solution` class with a `solve()` method.
+### 7. Solution Section
+- Place logic in a `Solution` section with a `solve()` method.
 - Placeholder for contest-specific logic.
 
 ### 8. Main Function
