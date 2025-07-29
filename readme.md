@@ -45,7 +45,7 @@ We're working on actively improving the template. Stay updated by starring the r
 Or you can:
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-repo/dbcp.git
+   git clone https://github.com/shuretokki/dbcp.git
    ```
 2. **Copy the Template**:
    - Copy `dbcp.cpp` to your working directory and rename it as needed (e.g., `solution.cpp`).
@@ -113,14 +113,18 @@ The template uses:
   - `rall(v)`: `v.rbegin(), v.rend()`.
   - `each(it, v)`: Iterates over container `v` with iterator `it`.
 - **Utility Macros**:
-  - `is_odd(x)`: Checks if `x` is odd.
+  - `isOdd(x)`: Checks if `x` is odd.
   - `sz(v)`: Returns container size as an integer.
   - `add(a, b)`, `sub(a, b)`, `mul(a, b)`: Modular arithmetic operations.
   - `inv(n)`: Modular inverse of `n` under `MOD`.
+<<<<<<< HEAD
   - `ceil_div(a, b)`: Ceiling of `a/b`.
   - `pb`: Alias for `push_back`.
   - `eb`: Alias for `emplace_back`.
   - `mp`: Alias for `make_pair`.
+=======
+  - `ceilDiv(a, b)`: Ceiling of `a/b`.
+>>>>>>> 97653e24e9c839d8844d67763fe60240c4deed83
 - **Priority Queue Aliases**:
   - `pqmax`: Max heap (`priority_queue<int>`).
   - `pqmin`: Min heap (`priority_queue<int, vector<int>, greater<int>>`).
@@ -199,7 +203,7 @@ The template uses:
      ```
    - Another Example:
      ```cpp
-     Redirect("Hello World#Hello#World"); // Note that `#` can replace '/n' in this Function
+     Redirect("Hello World#Hello#World"); // Note that `#` can replace '/n' in this function
 
      string hw, h, w;
      input(hw, h, w); // hw take "Hello World", h take "Hello", w take "World"
