@@ -35,6 +35,9 @@ constexpr int         INF  = 1e9;
 constexpr ll          LINF = 1e18;
 
 #pragma setup
+#pragma GCC optimize("O3,unroll-loops")
+#pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
+
 static const auto __PROGRAM_START_TIME = chrono::steady_clock::now();
 static const auto __SET_IO             = [] {
     ios_base::sync_with_stdio(false);
