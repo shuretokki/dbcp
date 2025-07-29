@@ -18,30 +18,21 @@ using namespace std;
 /* clang-format on */
 /*------------------*/
 #pragma alias
-using vi                  = vector<int>;
-using vvi                 = vector<vi>;
-using ll                  = long long;
-using ld                  = long double;
-constexpr long long   MOD = 1e9 + 7;
-constexpr long double PI  = acos(-1.0);
-
-#pragma macro
-#define rep(i, n)     for(int i = 0; i < (n); ++i)
-#define rep1(i, n)    for(int i = 1; i <= (n); ++i)
-#define rev(i, n)     for(int i = (n) - 1; i >= 0; --i)
-#define rev1(i, n)    for(int i = (n); i > 0; --i)
-#define all(v)        v.begin(), v.end()
-#define rall(v)       v.rbegin(), v.rend()
-#define each(it, v)   for(auto& it : v)
-#define isOdd(x)      ((x) % 2)
-#define sz(v)         ((int)(v).size())
-#define add(a, b)     (((a) % MOD + (b) % MOD) % MOD)
-#define sub(a, b)     (((a) % MOD - (b) % MOD + MOD) % MOD)
-#define mul(a, b)     (((a) % MOD * (b) % MOD) % MOD)
-#define inv(n)        power(n, MOD - 2)
-#define ceilDiv(a, b) (((a) + (b) - 1) / (b))
-#define pqmax         priority_queue<int>
-#define pqmin         priority_queue<int, vector<int>, greater<int>>
+using str                  = string;
+using strv                 = string_view;
+using ll                   = long long;
+using ld                   = long double;
+using vi                   = vector<int>;
+using vvi                  = vector<vi>;
+using vll                  = vector<ll>;
+using vb                   = vector<bool>;
+using pii                  = pair<int, int>;
+using vpii                 = vector<pii>;
+using cphro                = int;
+constexpr long long   MOD  = 1e9 + 7;
+constexpr long double PI   = acos(-1.0);
+constexpr int         INF  = 1e9;
+constexpr ll          LINF = 1e18;
 
 #pragma setup
 static const auto __PROGRAM_START_TIME = chrono::steady_clock::now();
@@ -61,18 +52,19 @@ static const auto __SET_IO             = [] {
     #define debug(...)
     #define scope(...)
 #endif
-#define input(...)    ::Reader::read(__VA_ARGS__)
-#define output(...)   ::Writer::write(__VA_ARGS__)
-#define outputln(...) ::Writer::writeln(__VA_ARGS__)
-#define delim(c, d)   DelimitedContainer(c, d)
+#define input(...)         ::Reader::read(__VA_ARGS__)
+#define output(...)        ::Writer::write(__VA_ARGS__)
+#define outputln(...)      ::Writer::writeln(__VA_ARGS__)
+#define fninput(c, lambda) ::Reader::readwl(c, lambda) // add
+#define delim(c, d)        DelimitedContainer(c, d)
 
 /* clang-format off */
 #pragma dbg origin
 namespace {
     namespace color {
         constexpr string_view O0m {"\033[0m"}, O31m {"\033[31m"},
-          O32m {"\033[32m"}, O33m {"\033[33m"}, O34m {"\033[34m"},
-          O35m {"\033[35m"}, O36m {"\033[36m"}, O90m {"\033[90m"};
+        O32m {"\033[32m"}, O33m {"\033[33m"}, O34m {"\033[34m"},
+        O35m {"\033[35m"}, O36m {"\033[36m"}, O90m {"\033[90m"};
     }
 
     inline int DEBUG_INDENT_LEVEL = 0;
@@ -92,13 +84,13 @@ namespace {
     void Render(stringstream&, const T&);
     template <typename T>
     concept is_iterable = requires(T t) {
-                              t.begin();
-                              t.end();
-                          } && ! is_same_v<T, string>;
+                            t.begin();
+                            t.end();
+                        } && ! is_same_v<T, string>;
 
     template <typename T>
     concept is_2d_iterable
-      = is_iterable<T> && is_iterable<typename T::value_type>;
+    = is_iterable<T> && is_iterable<typename T::value_type>;
 
     string get_indent_string() {
         return string(DEBUG_INDENT_LEVEL * 2, ' ');
@@ -126,7 +118,7 @@ namespace {
             ss << p << " -> ";
             Render(ss, *p);
         } else {
-            ss << "nullptr";
+        ss << "nullptr";
         }
     }
 
@@ -153,12 +145,12 @@ namespace {
     void Render(stringstream& ss, const tuple<T...>& t) {
         ss << "{";
         apply(
-          [&](const auto&... args) {
-              bool first = true;
-              ((ss << (first ? "" : ","), Render(ss, args), first = false),
-               ...);
-          },
-          t);
+        [&](const auto&... args) {
+            bool first = true;
+            ((ss << (first ? "" : ","), Render(ss, args), first = false),
+            ...);
+        },
+        t);
         ss << "}";
     }
 
@@ -186,7 +178,7 @@ namespace {
     void Render(stringstream& ss, const is_2d_iterable auto& matrix) {
         string base_indent = get_indent_string();
         ss << "[" << matrix.size() << "x"
-           << (matrix.empty() ? 0 : matrix.begin()->size()) << "]\n";
+        << (matrix.empty() ? 0 : matrix.begin()->size()) << "]\n";
         bool first_row = true;
         for(const auto& row : matrix) {
             if(! first_row)
@@ -200,7 +192,7 @@ namespace {
                 Render(cell_ss, cell);
                 string cell_str = cell_ss.str();
                 if(cell_str.length() >= 2 && cell_str.front() == '\''
-                   && cell_str.back() == '\'') {
+                && cell_str.back() == '\'') {
                     ss << cell_str.substr(1, cell_str.length() - 2);
                 } else {
                     ss << cell_str;
@@ -230,10 +222,10 @@ namespace {
                 }
                 auto name = names.substr(0, split_pos);
                 names     = (split_pos == string_view::npos)
-                              ? ""
-                              : names.substr(split_pos + 1);
+                            ? ""
+                            : names.substr(split_pos + 1);
                 name.remove_prefix(
-                  min(name.find_first_not_of(" \t\n\r"), name.size()));
+                min(name.find_first_not_of(" \t\n\r"), name.size()));
                 return name;
             }
 
@@ -244,7 +236,7 @@ namespace {
                     if(! first)
                         cerr << color::O90m << ", " << color::O0m;
                     cerr << color::O33m << get_name(names_sv) << color::O90m
-                         << ": " << color::O0m;
+                        << ": " << color::O0m;
                     stringstream value_ss;
                     Render(value_ss, v);
                     cerr << value_ss.str();
@@ -262,31 +254,31 @@ namespace {
 
                 if constexpr(sizeof...(Args) > 0) {
                     using FirstArg
-                      = decay_t<tuple_element_t<0, tuple<Args...>>>;
+                    = decay_t<tuple_element_t<0, tuple<Args...>>>;
                     if constexpr(is_same_v<FirstArg, const char*>) {
                         string_view title = get<0>(args_tuple);
                         cerr << color::O90m << "[ " << color::O34m << title
-                             << color::O90m << " ] " << color::O0m;
+                            << color::O90m << " ] " << color::O0m;
 
                         if constexpr(sizeof...(Args) > 1) {
                             size_t comma_pos = names_sv.find(',');
                             names_sv         = (comma_pos != string_view::npos)
-                                                 ? names_sv.substr(comma_pos + 1)
-                                                 : "";
+                                                ? names_sv.substr(comma_pos + 1)
+                                                : "";
                             apply(
-                              [&](auto&&, auto&&... rest) {
-                                  print_vars(names_sv, rest...);
-                              },
-                              args_tuple);
+                            [&](auto&&, auto&&... rest) {
+                                print_vars(names_sv, rest...);
+                            },
+                            args_tuple);
                         }
                     } else {
                         cerr << color::O90m << "[ " << color::O34m << "DEBUG"
-                             << color::O90m << " ] " << color::O0m;
+                            << color::O90m << " ] " << color::O0m;
                         print_vars(names_sv, args...);
                     }
                 } else {
                     cerr << color::O90m << "[ " << color::O34m << "DEBUG"
-                         << color::O90m << " ]" << color::O0m;
+                        << color::O90m << " ]" << color::O0m;
                 }
 
                 cerr << '\n';
@@ -302,7 +294,7 @@ namespace {
                 , start_time(chrono::steady_clock::now()) {
                 print_indent();
                 cerr << color::O90m << "[ > " << color::O35m << name
-                     << color::O90m << " ]" << color::O0m << '\n';
+                    << color::O90m << " ]" << color::O0m << '\n';
                 DEBUG_INDENT_LEVEL++;
             }
 
@@ -310,26 +302,39 @@ namespace {
                 DEBUG_INDENT_LEVEL--;
                 auto end_time = chrono::steady_clock::now();
                 auto duration = chrono::duration_cast<chrono::milliseconds>(
-                  end_time - start_time);
+                end_time - start_time);
 
                 print_indent();
                 cerr << fixed;
                 cerr << color::O90m << "[ < " << color::O35m << name
-                     << color::O90m << " ] @ " << color::O32m
-                     << duration.count() << "ms taken" << color::O0m << '\n';
+                    << color::O90m << " ] @ " << color::O32m
+                    << duration.count() << "ms taken" << color::O0m << '\n';
             }
     };
 
     template <typename Container>
     struct DelimitedContainer {
             const Container& container;
-            const char*      delimiter;
+            const char* delimiter;
     };
 
     struct Reader {
         template <typename... Args>
         static void read(Args&... args) {
             (read_one(args), ...);
+        }
+
+        template <typename T, typename Lambda>
+        static void readwl(T& container, Lambda&& fn) {
+            if constexpr(is_iterable<T>) {
+                for (auto& element : container) {
+                    read_one(element);
+                    element = fn(element);
+                }
+            } else {
+                read_one(container);
+                container = fn(container);
+            }
         }
 
         private:
@@ -401,24 +406,25 @@ namespace {
     struct is_specialization<Ref<Args...>, Ref> : true_type {};
 
     struct Writer {
-        public:
-            template <typename... Args>
-            static void write(const Args&... args) {
-                bool first  = true;
-                auto writer = [&](const auto& arg) {
-                    if(! first)
-                        write_char(' ');
-                    print_h(arg);
-                    first = false;
-                };
-                (writer(args), ...);
-            }
+    public:
+        template <typename... Args>
+        static void write(const Args&... args) {
+            bool first = true;
+            auto writer = [&](const auto& arg) {
+                if (!first)
+                    write_char(' ');
+                print_h(arg);
+                first = false;
+            };
+            (writer(args), ...);
+        }
 
-            template <typename... Args>
-            static void writeln(const Args&... args) {
-                write(args...);
-                write_char('\n');
-            }
+        template <typename... Args>
+        static void writeln(const Args&... args) {
+            write(args...);
+            write_char('\n');
+        }
+
 
         private:
             inline static char buffer[1 << 20];
@@ -450,6 +456,7 @@ namespace {
                     write_char(s[i]);
             }
 
+
             template <typename T>
             static void print_h(const T& arg) {
                 if constexpr(is_specialization<T, DelimitedContainer>::value) {
@@ -476,17 +483,17 @@ namespace {
                     }
                 } else if constexpr(requires { get<0>(arg); }) {
                     apply(
-                      [](const auto&... elems) {
-                          bool first     = true;
-                          auto print_tup = [&](const auto& e) {
-                              if(! first)
-                                  write_char(' ');
-                              print_h(e);
-                              first = false;
-                          };
-                          (print_tup(elems), ...);
-                      },
-                      arg);
+                    [](const auto&... elems) {
+                        bool first     = true;
+                        auto print_tup = [&](const auto& e) {
+                            if(! first)
+                                write_char(' ');
+                            print_h(e);
+                            first = false;
+                        };
+                        (print_tup(elems), ...);
+                    },
+                    arg);
                 } else {
                     auto s = to_string(arg);
                     write_str(s.c_str());
@@ -494,44 +501,53 @@ namespace {
             }
     };
 } /* namespace */
-
-/*-----------------*/
+ /*-----------------*/
 /* clang-format on */
 
-class Solution {
-#pragma solution
+#pragma macro
+#define rep(i, n)     for(int i = 0; i < (n); ++i)
+#define rep1(i, n)    for(int i = 1; i <= (n); ++i)
+#define rev(i, n)     for(int i = (n) - 1; i >= 0; --i)
+#define rev1(i, n)    for(int i = (n); i > 0; --i)
+#define all(v)        v.begin(), v.end()
+#define rall(v)       v.rbegin(), v.rend()
+#define each(it, v)   for(auto& it : v)
+#define isOdd(x)      ((x) % 2)
+#define sz(v)         ((int)(v).size())
+#define pb            push_back
+#define eb            emplace_back
+#define mp            make_pair
+#define add(a, b)     (((a) % MOD + (b) % MOD) % MOD)
+#define sub(a, b)     (((a) % MOD - (b) % MOD + MOD) % MOD)
+#define mul(a, b)     (((a) % MOD * (b) % MOD) % MOD)
+#define ceilDiv(a, b) (((a) + (b) - 1) / (b))
+#define pqmax         priority_queue<int>
+#define pqmin         priority_queue<int, vector<int>, greater<int>>
 
-    public:
-        int solve(const int& x) {
-            scope("Solve");
-            debug(x, x * 2);
-            return x * 2;
-        }
-};
-
-int main() {
+#pragma solution // adjust
+void solve() {
+    scope("Solve");
+}
+cphro main() {
     scope("Main");
-    Solution s;
+
 #pragma input
     /* clang-format off */
     /* Note: Input for Debug Purpose. */
     // ! Define -DLOCAL_DBG to use it.
 
-    Redirect(R"(
-        10
-    )");
+    Redirect(R"(Input Here)");
 
-    #pragma main
+#pragma main
     /* clang-format on */
     /* Note: Main Submission.*/
     // ! Define -DLOCAL_DBG to activate debug() & scope().
 
-    int x;
-    input(x);
-    output(s.solve(x));
-
+    str testing;
+    input(testing);
+    debug(testing.back());
+    output(testing);
     return 0;
 }
-
 /* Note: Remove all the note
 if you already know. */
