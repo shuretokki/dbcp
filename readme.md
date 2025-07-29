@@ -14,7 +14,7 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/Version-1.0%20Stable-FFF?labelColor=black&style=for-the-badge&color=c20a71)
+![Version](https://img.shields.io/badge/Version-1.1.0%20Stable-FFF?labelColor=black&style=for-the-badge&color=c20a71)
 
 </div>
 
@@ -82,16 +82,25 @@ The template uses:
 - Includes `<bits/stdc++.h>` for full C++ standard library access.
 - Uses `std` namespace to avoid prefixing.
 - Configures fast I/O with `ios_base::sync_with_stdio(false)` and `cin.tie(NULL)`.
+- Includes GCC optimization pragmas for enhanced performance (`O3`, `unroll-loops`, `avx2`, etc.).
 
 ### 2. Type Aliases
 - `vi`: `vector<int>`.
 - `vvi`: `vector<vi>` (2D vector of integers).
 - `ll`: `long long`.
+- `vll`: `vector<long long>`.
 - `ld`: `long double`.
+- `str`: `string`.
+- `strv`: `string_view`.
+- `vb`: `vector<bool>`.
+- `pii`: `pair<int, int>`.
+- `vpii`: `vector<pair<int, int>>`.
 
 ### 3. Constants
 - `MOD`: `1e9 + 7` for modular arithmetic.
 - `PI`: `acos(-1.0)` for precise pi value.
+- `INF`: Large integer constant for infinity comparisons.
+- `LINF`: Large long long constant for infinity comparisons.
 
 ### 4. Macros
 - **Loop Macros**:
@@ -109,6 +118,9 @@ The template uses:
   - `add(a, b)`, `sub(a, b)`, `mul(a, b)`: Modular arithmetic operations.
   - `inv(n)`: Modular inverse of `n` under `MOD`.
   - `ceil_div(a, b)`: Ceiling of `a/b`.
+  - `pb`: Alias for `push_back`.
+  - `eb`: Alias for `emplace_back`.
+  - `mp`: Alias for `make_pair`.
 - **Priority Queue Aliases**:
   - `pqmax`: Max heap (`priority_queue<int>`).
   - `pqmin`: Min heap (`priority_queue<int, vector<int>, greater<int>>`).
